@@ -39,7 +39,106 @@ public class Game {
         }
     }
 
+    //  ゲームの行列をランダムに返す関数()
+//   10の位は行,1の位は列を表す
+    public static int createRandomPlace(){
+        Random rand = new Random();
+        int result = 0;
+        result = rand.nextInt(3) * 10;
+        result += rand.nextInt(3);
+        return result;
+    }
 
+    //  ゲームが勝ち負けを返す関数
+//    勝った場合はtrueをゲームを続行する場合はfalseを返す
+    public static boolean judgement(String symbol){
+//      勝ちが確定した場合はtrueを格納する
+        boolean judFlg = true;
+
+//      縦の判定
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                if(gameData[j][i].equals(symbol)){
+                    continue;
+                }else{
+                    judFlg = false;
+                    break;
+                }
+            }
+            if(judFlg || i ==2) {
+                break;
+            }
+            judFlg = true;
+        }
+//        処理を続けるか続けないかの判定
+        if(judFlg){
+            System.out.println(1);
+            return true;
+        }else{
+//          フラグの初期化
+            judFlg = true;
+        }
+
+
+//        横の判定
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                if(gameData[i][j].equals(symbol)){
+                    continue;
+                }else{
+                    judFlg = false;
+                    break;
+                }
+            }
+            if(judFlg || i ==2) {
+                break;
+            }
+            judFlg = true;
+        }
+        //        処理を続けるか続けないかの判定
+        if(judFlg){
+            System.out.println(2);
+            return true;
+        }else{
+//          フラグの初期化
+            judFlg = true;
+        }
+
+
+//        ななめの判定
+        for(int i = 0; i < 3; i++){
+            if(gameData[i][i].equals(symbol)){
+                continue;
+            }else{
+                judFlg = false;
+                break;
+            }
+        }
+        // 処理を続けるか続けないかの判定
+        if(judFlg){
+            return true;
+        }else{
+//          フラグの初期化
+            judFlg = true;
+        }
+
+        for(int i = 0; i < 3; i++){
+            if(gameData[i][2 - i].equals(symbol)){
+                continue;
+            }else{
+                judFlg = false;
+                break;
+            }
+        }
+
+        // 最終的な勝ち負けの判定
+        if(judFlg){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 
 
 }
